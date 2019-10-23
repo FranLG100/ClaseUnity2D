@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour {
     public RawImage background;
     public RawImage platform;
     public GameObject uiIdle;
+    public float scaleTime = 6f;
+    public float scaleInc = 0.25f;
 
    
     public GameState gameState = GameState.Idle;
@@ -38,6 +40,7 @@ public class GameController : MonoBehaviour {
             player.SendMessage("UpdateState", "PlayerRun");
             enemyGenerator.SendMessage("StartGenerator");
             musicPlayer.Play();
+            InvokeRepeating("GameTimeScale", scaleTime, scaleTime);
         }
         else if (gameState==GameState.Playing) {
             Parallax();
@@ -60,6 +63,16 @@ public class GameController : MonoBehaviour {
     }
 
     public void RestartGame() {
+        ResetTimeScale();
         SceneManager.LoadScene("Nivel");
+    }
+
+    public void GameTimeScale() {
+        Time.timeScale += scaleInc;
+    }
+
+    public void ResetTimeScale(float newTimeScale=1f) {
+        CancelInvoke("GameTimeScale");
+        Time.timeScale = 1f;
     }
 }
