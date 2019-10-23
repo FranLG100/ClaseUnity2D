@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour {
             gameState = GameState.Playing;
             uiIdle.SetActive(false);
             player.SendMessage("UpdateState", "PlayerRun");
+            player.SendMessage("DustPlay");
             enemyGenerator.SendMessage("StartGenerator");
             musicPlayer.Play();
             InvokeRepeating("GameTimeScale", scaleTime, scaleTime);

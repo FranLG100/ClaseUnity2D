@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     private AudioSource audioPlayer;
     private float startY;
+    public ParticleSystem dust;
 
 	// Use this for initialization
 	void Start () {
@@ -49,10 +50,20 @@ public class PlayerController : MonoBehaviour {
             game.GetComponent<AudioSource>().Stop();
             audioPlayer.clip = dieClip;
             audioPlayer.Play();
+            DustStop();
         }
     }
 
     public void GameReady() {
         game.GetComponent<GameController>().gameState = GameState.Ready;
+    }
+
+    public void DustPlay() {
+        dust.Play();
+    }
+
+    public void DustStop()
+    {
+        dust.Stop(); 
     }
 }
