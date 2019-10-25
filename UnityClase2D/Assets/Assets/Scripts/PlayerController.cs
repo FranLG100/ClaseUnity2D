@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject enemyGenerator;
     public AudioClip jumpClip;
     public AudioClip dieClip;
+    public AudioClip pointClip;
     private Animator animator;
     private AudioSource audioPlayer;
     private float startY;
@@ -51,6 +52,14 @@ public class PlayerController : MonoBehaviour {
             audioPlayer.clip = dieClip;
             audioPlayer.Play();
             DustStop();
+        }
+
+        else if (other.gameObject.tag == "Point")
+        {
+            game.SendMessage("IncreasePoints");
+            Debug.Log("Ha chocado");
+            audioPlayer.clip = pointClip;
+            audioPlayer.Play();
         }
     }
 
